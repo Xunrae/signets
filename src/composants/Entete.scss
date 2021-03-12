@@ -20,4 +20,13 @@
       height: 35px;
     }
   }
+
+  .btnDeconnexion{
+    color:red;
+    background-color:white;
+    font-size: 0.6em;
+    margin-left: 10px;
+
+    &:hover{border:1px solid red;}
+  }
 }

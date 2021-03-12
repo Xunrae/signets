@@ -26,4 +26,38 @@ const firebaseConfig = {
   //initialiser firestore
   export const instanceFirestore = firebase.firestore();
 
+
+  //utiliser async
+  const adresseApi = 'https://fakestoreapi.com/products?limit=3';
+  //exemple 1 : utilisation d'un callback (fonction de rappel) (methode la moins efficace)
+  function testAsyncCallback(){
+    let xhr = new XMLHttpRequest();
+    xhr.open("get", adresseApi);
+    xhr.responseType = 'json';
+    xhr.onload = gererReponse;
+    xhr.send();
+
+    function gererReponse(){
+        console.log("Méthode 1 : avec fonction de rappel : ", xhr.response);
+    }
+  }
+  //testAsyncCallback();
   
+  //exemple 2 : utilisation des 'promesses' (ou objet 'Promise')
+  function testAsyncPromise(){
+    fetch(adresseApi).then(
+        reponse =>  reponse.json()
+    ).then(
+        reponseJSON => console.log("Méthode 2 - Avec une Promise :", reponseJSON)
+    ).catch(
+        erreur => console.log(erreur)
+    );
+  }
+  //testAsyncPromise();
+  //exemple 3 : utilisation de la syntaxe async/await
+  async function testAsyncAwait(){
+    const reponse = await fetch(adresseApi);
+    const reponseJSON = await reponse.json();
+    console.log("Méthode 3 - Avec async/await : ", reponseJSON)
+  }
+  //testAsyncAwait();
